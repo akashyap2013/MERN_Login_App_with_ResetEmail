@@ -25,3 +25,6 @@
     background-color: #ff6a6a;
 }
 
+input[type='file']{
+    display: none;
+}
