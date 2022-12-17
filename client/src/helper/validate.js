@@ -45,7 +45,7 @@ export async function profileValidation(values){
 
 /** validate password */
 function passwordVerify(errors = {}, values){
-
+    /* eslint-disable no-useless-escape */
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if(!values.password){
