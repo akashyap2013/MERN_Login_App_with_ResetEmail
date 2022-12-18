@@ -1,8 +1,19 @@
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+
 
 /** Make API Requests */
 
 
+/** To get username from Token */
+export async function getUsername(){
+    const token = localStorage.getItem('token')
+    if(!token) return Promise.reject("Cannot find Token");
+    let decode = jwt_decode(token)
+    return decode;
+}
 
 /** authenticate function */
 export async function authenticate(username){
@@ -86,8 +97,19 @@ export async function generateOTP(username){
 /** verify OTP */
 export async function verifyOTP({ username, code }){
     try {
-        await axios.get('/api/verifyOTP', { params : { username, code }})
+       const { data, status } = await axios.get('/api/verifyOTP', { params : { username, code }})
+       return { data, status }
     } catch (error) {
         return Promise.reject(error);
+    }
+}
+
+/** reset password */
+export async function resetPassword({ username, password }){
+    try {
+        const { data, status } = await axios.put('/api/resetPassword', { username, password });
+        return Promise.resolve({ data, status})
+    } catch (error) {
+        return Promise.reject({ error })
     }
 }
