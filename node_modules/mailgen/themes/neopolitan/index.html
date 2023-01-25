@@ -1,0 +1,384 @@
+<%
+if (locals.action) {
+    // Make it possible to override action button color (specify fallback color if no color specified)
+    locals.action.forEach(function(actionItem) {
+      actionItem.button.forEach(function(button) {
+          // Make it possible to override action button color (specify fallback color if no color specified)
+          if (!button.color) {
+              button.color = '#414141';
+          }
+
+          deprecatedColorToHex(button);
+        });
+    });
+
+  // Convert deprecated red/green/blue action button color to hex since we switched to a hex-based button color
+  function deprecatedColorToHex(button) {
+      if (button.color === 'red') {
+            button.color = '#DC4D2F';
+      }
+      else if (button.color === 'green') {
+            button.color = '#22BC66';
+      }
+      else if (button.color === 'blue') {
+            button.color = '#3869D4';
+      }
+  }
+}
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Neopolitan Welcome Email</title>
+  <!-- Designed by https://github.com/kaytcat -->
+  <!-- Robot header image designed by Freepik.com -->
+
+  <style type="text/css">
+  @import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+
+  /* Take care of image borders and formatting */
+
+  img {
+    max-width: 600px;
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  a {
+    text-decoration: none;
+    border: 0;
+    outline: none;
+    color: #bbbbbb;
+  }
+
+  .branding a {
+    color: inherit;
+  }
+
+  a img {
+    border: none;
+  }
+
+  /* General styling */
+
+  td, h1, h2, h3  {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 400;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .data-table td, .data-table th {
+      text-align: left;
+      padding: 0 5px;
+  }
+
+  .data-table td {
+      padding: 5px 5px;
+  }
+
+  body {
+    line-height: 1.7;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:none;
+    width: 100%;
+    height: 100%;
+    color: #37302d;
+    background: #ffffff;
+    font-size: 16px;
+  }
+
+  table {
+    border-collapse: collapse !important;
+  }
+
+  .email-logo {
+       max-height: 50px;
+  }
+
+  .headline {
+    color: #ffffff;
+    font-size: 36px;
+  }
+
+  .force-full-width {
+    width: 100% !important;
+  }
+
+  .data-table {
+    font-size: 14px;
+  }
+
+  .data-table th {
+    border-bottom: 1px solid rgba(0, 74, 74, 0.3);
+  }
+
+  .dictionary {
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto 10px;
+    padding: 0;
+  }
+
+  .dictionary dt {
+    clear: both;
+    color: #000;
+    font-weight: bold;
+    margin-right: 4px;
+  }
+
+  .dictionary dd {
+      margin: 0 0 10px 0;
+  }
+  </style>
+  <style type="text/css" media="screen">
+      @media screen {
+         /*Thanks Outlook 2013! http://goo.gl/XLxpyl */
+        td, h1, h2, h3 {
+          font-family: 'Droid Sans', 'Helvetica Neue', 'Arial', 'sans-serif' !important;
+        }
+      }
+  </style>
+
+  <style type="text/css" media="only screen and (max-width: 480px)">
+    /* Mobile styles */
+    @media only screen and (max-width: 480px) {
+      table[class="w320"] {
+        width: 320px !important;
+      }
+    }
+  </style>
+</head>
+<body class="body" dir="<%- textDirection %>" style="padding:0; margin:0; display:block; background:#ffffff; -webkit-text-size-adjust:none;" bgcolor="#ffffff">
+<!-- Support for Gmail Go-To Actions -->
+<% if (locals.goToAction) { %>
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "EmailMessage",
+    "potentialAction": {
+        "@type": "ViewAction",
+        "url": "<%- goToAction.link %>",
+        "target": "<%- goToAction.link %>",
+        "name": "<%- goToAction.text %>"
+    },
+    "description": "<%- goToAction.description %>"
+}
+</script>
+<% } %>
+<table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%" >
+  <tr>
+    <td align="center" valign="top" bgcolor="#ffffff"  width="100%">
+      <center>
+        <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="600" class="w320">
+          <tr>
+            <td align="center" valign="top">
+                <table style="margin: 10px auto;" cellpadding="0" cellspacing="0" width="100%" style="margin:0 auto;">
+                  <tr>
+                    <td class="branding" style="font-size: 30px; text-align:center;">
+                        <a href="<%- product.link %>" target="_blank">
+                            <% if (locals.product.logo) { %>
+                              <% if (product.logoHeight) { %>
+                                <img src="<%- product.logo %>" style="height: <%- product.logoHeight %>;" alt="" />
+                              <% } else { %>
+                                <img src="<%- product.logo %>" class="email-logo" alt="" />
+                                <% } %>
+                            <% } else { %>
+                                <%- product.name %>
+                            <% } %>
+                        </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <table style="margin: 0 auto; border-radius: 3px 3px 0 0; padding: 0 15px;" cellpadding="0" cellspacing="0" width="100%" bgcolor="#4dbfbf">
+                  <% if (locals.title) { %>
+                    <tr>
+                      <td class="headline">
+                        <div style="margin-top: 30px">
+                          <%- title %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% } %>
+                  <tr>
+                    <td style="color:#003C3C">
+                      <br />
+                        <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="70%">
+                            <tr>
+                                <td style="padding: 0 15px;">
+                                  <% if (locals.intro) { %>
+                                    <% intro.forEach(function (introItem) { -%>
+                                      <p><%- introItem %></p>
+                                    <% }) -%>
+                                  <% } %>
+
+                                  <!-- Dictionary -->
+                                  <% if (locals.dictionary) { %>
+                                  <dl class="dictionary">
+                                    <% for (item in dictionary) { -%>
+                                      <dt><%- item.charAt(0).toUpperCase() + item.slice(1) %>:</dt>
+                                      <dd><%- dictionary[item] %></dd>
+                                    <% } -%>
+                                  </dl>
+                                  <% } %>
+                                </td>
+                            </tr>
+                      </table>
+                    </td>
+                  </tr>
+                    <tr>
+                        <td style="color:#003C3C">
+                            <!-- Table -->
+                            <% if (locals.table) { %>
+                              <% table.forEach(function (tableItem, i) { -%>
+                                <center>
+                                <br>
+                                <h3 style="margin: 0;"><%- tableItem.title %></h3>
+                                <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="70%">
+                                <tr>
+                                    <td>
+                                      <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
+                                          <tr>
+                                              <% for (var column in tableItem.data[0]) {%>
+                                              <th
+                                                  <% if(tableItem.columns && tableItem.columns.customWidth && tableItem.columns.customWidth[column]) { %>
+                                                      width="<%= tableItem.columns.customWidth[column] %>"
+                                                  <% } %>
+                                                  <% if(tableItem.columns && tableItem.columns.customAlignment && tableItem.columns.customAlignment[column]) { %>
+                                                      style="text-align:<%= tableItem.columns.customAlignment[column] %>"
+                                                  <% } %>
+                                              >
+                                                  <p><%- column.charAt(0).toUpperCase() + column.slice(1) %></p>
+                                              </th>
+                                              <% } %>
+                                          </tr>
+                                          <% for (var i in tableItem.data) {%>
+                                          <tr>
+                                              <% for (var column in tableItem.data[i]) {%>
+                                              <td
+                                                  <% if(tableItem.columns && tableItem.columns.customAlignment && tableItem.columns.customAlignment[column]) { %>
+                                                      style="text-align:<%= tableItem.columns.customAlignment[column] %>"
+                                                  <% } %>
+                                              >
+                                                  <%- tableItem.data[i][column] %>
+                                              </td>
+                                              <% } %>
+                                          </tr>
+                                          <% } %>
+                                      </table>
+                                    </td>
+                                </tr>
+                                </table>
+                              <% }) %>
+                            <% } %>
+                              <br>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+                <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="100%" bgcolor="#f5774e">
+                  <tr>
+                    <td style="color:#801F00">
+                      <center>
+                        <table style="margin: 0 auto;" cellpadding="0" cellspacing="0" width="70%">
+                          <tr>
+                            <td>
+                            <br>
+                            <!-- Action -->
+                            <% if (locals.action.length !== 0) { %>
+                                <% action.forEach(function (actionItem) { -%>
+
+                                    <center>
+                                        <table style="margin: 0 auto; padding: 0 15px;" cellpadding="0" cellspacing="0" width="100%">
+                                        <tr>
+                                            <td style="padding: 0 15px;">
+                                            <br>
+                                            <%- actionItem.instructions %>
+                                            <br>
+                                            <br>
+                                            </td>
+                                        </tr>
+                                        </table>
+                                    </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0 15px;">
+                                    <% actionItem.button.forEach(function (actionButton) { -%>
+                                        <!--[if mso]>
+                                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="8%" stroke="f" fillcolor="#178f8f">
+                                          <w:anchorlock/>
+                                          <center>
+                                        <![endif]-->
+                                        <a target="_blank" href="<%- actionButton.link %>" style="background-color:<%- actionButton.color %>;border-radius:4px;color:#ffffff;display:inline-block;font-family:Helvetica, Arial, sans-serif;font-size:16px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;padding:0 25px;-webkit-text-size-adjust:none;">
+                                          <%- actionButton.text %>
+                                        </a>
+                                        <!--[if mso]>
+                                          </center>
+                                          </v:roundrect>
+                                        <![endif]-->
+                                      </div>
+                                    <% }) -%>
+                                <% }) -%>
+                            <% } %>
+                                <br>
+                                <br>
+
+                              <% if (locals.outro) { %>
+                                <% outro.forEach(function (outroItem) { -%>
+                                  <%- outroItem %>
+                                  <br>
+                                  <br>
+                                <% }) -%>
+                              <% } %>
+
+                              <% if (signature) { %>
+                                <%- signature %>,
+                                <br>
+                                <%- product.name %>
+                              <% } %>
+
+                              <br><br>
+                            </td>
+                          </tr>
+                        </table>
+                      </center>
+                    </td>
+                  </tr>
+                  <% if (locals.action.length !== 0 && locals.action[0].button[0].fallback) { %>
+                    <tr>
+                      <td style="padding: 0 0 10px 0; color:#801F00">
+                        <% action.forEach(function (actionItem) { -%>
+                          <% actionItem.button.forEach(function (actionButton) { -%>
+                            <% if (actionButton.fallback != null) { %>
+                              <p style="font-size: 0.80em; padding: 0 50px 0 50px; text-align: left;">
+                                <%- actionButton.fallback.text %> <br />
+                                <a href="<%- actionButton.link %>" style="color:initial"><%- actionButton.link %></a>
+                              </p>
+                            <% } %>
+                          <% }) -%>
+                        <% }) -%>
+                      </td>
+                    </tr>
+                  <% } %>
+                  <tr>
+                    <td style="background-color:#414141; color:#bbbbbb; padding: 22px 0 22px 0; font-size:12px;">
+                        <%- product.copyright %>
+                    </td>
+                  </tr>
+                </table>
+            </td>
+          </tr>
+        </table>
+    </center>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

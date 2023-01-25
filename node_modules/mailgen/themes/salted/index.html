@@ -1,0 +1,479 @@
+<%
+if (locals.action) {
+    // Make it possible to override action button color (specify fallback color if no color specified)
+    locals.action.forEach(function(actionItem) {
+      actionItem.button.forEach(function(button) {
+          // Make it possible to override action button color (specify fallback color if no color specified)
+          if (!button.color) {
+              button.color = '#48CFAD';
+          }
+
+          deprecatedColorToHex(button);
+        });
+    });
+
+  // Convert deprecated red/green/blue action button color to hex since we switched to a hex-based button color
+  function deprecatedColorToHex(button) {
+      if (button.color === 'red') {
+            button.color = '#DC4D2F';
+      }
+      else if (button.color === 'green') {
+            button.color = '#22BC66';
+      }
+      else if (button.color === 'blue') {
+            button.color = '#3869D4';
+      }
+  }
+}
+%>
+<!DOCTYPE html>
+<html lang="en" dir="<%- textDirection %>">
+<head>
+<!--
+
+    SALTED | A RESPONSIVE EMAIL TEMPLATE
+    =====================================
+
+    Based on code used and tested by Litmus (@litmusapp)
+    Originally developed by Kevin Mandeville (@KEVINgotbounce)
+    Cleaned up by Jason Rodriguez (@rodriguezcommaj)
+    Presented by A List Apart (@alistapart)
+
+    Email is surprisingly hard. While this has been thoroughly tested, your mileage may vary.
+    It's highly recommended that you test using a service like Litmus and your own devices.
+
+    Enjoy!
+
+ -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<style type="text/css">
+    /* CLIENT-SPECIFIC STYLES */
+    #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+    .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+    body, table, td, a{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+    table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+    img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized image in Internet Explorer */
+
+    /* RESET STYLES */
+    body{margin:0; padding:0;}
+    img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+    body{height:100% !important; margin:0; padding:0; width:100% !important;}
+
+    /* iOS BLUE LINKS */
+    .appleBody a {color:#68440a; text-decoration: none;}
+    .appleFooter a {color:#999999; text-decoration: none;}
+
+    /* MAILGEN STYLES */
+    body {
+      max-width: 575px;
+      margin: 0 auto;
+    }
+
+    .email-logo {
+      max-height: 50px;
+    }
+
+    .branding a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+     /* Data table ------------------------------ */
+    .data-wrapper {
+      width: 100%;
+      margin: 0;
+      padding: 35px 0;
+    }
+    .data-table {
+      width: 100%;
+      margin: 0;
+    }
+    .data-table th {
+      text-align: left;
+      padding: 0px 5px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #DEDEDE;
+    }
+    .data-table th p {
+      margin: 0;
+      color: #74787E;
+      font-size: 12px;
+    }
+    .data-table td {
+      padding: 10px 5px;
+      color: #74787E;
+      font-size: 15px;
+      line-height: 18px;
+    }
+
+    /* Dictionary ------------------------------ */
+    .dictionary {
+      width: 100%;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .dictionary dt {
+      clear: both;
+      color: #000;
+      font-weight: bold;
+      margin-right: 4px;
+    }
+    .dictionary dd {
+      margin: 0 0 10px 0;
+    }
+
+    /* MOBILE STYLES */
+    @media screen and (max-width: 525px) {
+
+        /* ALLOWS FOR FLUID TABLES */
+        table[class="wrapper"]{
+          width:100% !important;
+        }
+
+        /* ADJUSTS LAYOUT OF LOGO IMAGE */
+        td[class="logo"]{
+          text-align: left;
+          padding: 20px 0 20px 0 !important;
+        }
+
+        td[class="logo"] img{
+          margin:0 auto!important;
+        }
+
+        /* USE THESE CLASSES TO HIDE CONTENT ON MOBILE */
+        td[class="mobile-hide"]{
+          display:none;}
+
+        img[class="mobile-hide"]{
+          display: none !important;
+        }
+
+        img[class="img-max"]{
+          max-width: 100% !important;
+          height:auto !important;
+        }
+
+        /* FULL-WIDTH TABLES */
+        table[class="responsive-table"]{
+          width:100%!important;
+        }
+
+        /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
+        td[class="padding"]{
+          padding: 10px 5% 15px 5% !important;
+        }
+
+        td[class="padding-copy"]{
+          padding: 10px 5% 10px 5% !important;
+          text-align: center;
+        }
+
+        td[class="padding-meta"]{
+          padding: 30px 5% 0px 5% !important;
+          text-align: center;
+        }
+
+        td[class="no-pad"]{
+          padding: 0 0 20px 0 !important;
+        }
+
+        td[class="no-padding"]{
+          padding: 0 !important;
+        }
+
+        td[class="section-padding"]{
+          padding: 50px 15px 50px 15px !important;
+        }
+
+        td[class="section-padding-bottom-image"]{
+          padding: 50px 15px 0 15px !important;
+        }
+
+        /* ADJUST BUTTONS ON MOBILE */
+        td[class="mobile-wrapper"]{
+            padding: 10px 5% 15px 5% !important;
+        }
+
+        table[class="mobile-button-container"]{
+            margin:0 auto;
+            width:100% !important;
+        }
+
+        a[class="mobile-button"]{
+            width:80% !important;
+            padding: 15px !important;
+            border: 0 !important;
+            font-size: 16px !important;
+        }
+
+    }
+</style>
+</head>
+<body style="margin: 0 auto; padding: 0;" dir="<%- textDirection %>">
+
+<!-- HEADER -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td bgcolor="#ffffff">
+            <div align="center" style="padding: 0px 15px 0px 15px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="500" class="wrapper">
+                    <!-- LOGO/PREHEADER TEXT -->
+                    <tr>
+                        <td style="padding: 30px 0px 30px 0px;" class="logo">
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td bgcolor="#ffffff" width="400" align="center" class="mobile-hide">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center" style="padding: 0 0 5px 0; font-size: 23px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666; text-decoration: none;">
+                                                    <span class="branding" style="color: #666666; text-decoration: none;">
+                                                        <a href="<%- product.link %>" target="_blank">
+                                                            <% if (locals.product.logo) { %>
+                                                                <% if (locals.product.logoHeight) { %>
+                                                                    <img src="<%- product.logo %>" style="height: <%- product.logoHeight %>;" alt="" />
+                                                                  <% } else { %>
+                                                                    <img src="<%- product.logo %>" class="email-logo" alt="" />
+                                                                    <% } %>
+                                                            <% } else { %>
+                                                                <%- product.name %>
+                                                            <% } %>
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<!-- ONE COLUMN W/ BOTTOM IMAGE SECTION -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td bgcolor="#f8f8f8" align="center" style="padding: 70px 15px 70px 15px;" class="section-padding-bottom-image">
+            <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>
+                                    <!-- COPY -->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <% if (locals.title) { %>
+                                            <tr>
+                                                <td align="center" style="font-size: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;" class="padding-copy">
+                                                    <%- title %>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        <tr>
+                                            <td align="center" style="padding: 20px 0 0 0; font-size: 16px; line-height: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                                              <!-- Intro -->
+                                                <% if (locals.intro) { %>
+                                                  <% intro.forEach(function (introItem) { -%>
+                                                    <p><%- introItem %></p>
+                                                  <% }) -%>
+                                                <% } %>
+
+                                                <!-- Dictionary -->
+                                                <% if (locals.dictionary) { %>
+                                                  <dl class="dictionary">
+                                                    <% for (item in dictionary) { -%>
+                                                      <dt><%- item.charAt(0).toUpperCase() + item.slice(1) %>:</dt>
+                                                      <dd><%- dictionary[item] %></dd>
+                                                    <% } -%>
+                                                  </dl>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Table -->
+                                    <% if (locals.table) { %>
+                                        <% table.forEach(function (tableItem, i) { -%>
+                                        <div style="margin: 50px 0 20px; font-size: 20px; text-align: center; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;"><%- tableItem.title %></div>
+                                        <table class="data-table" width="100%" cellpadding="0" cellspacing="0" style="margin: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666;">
+                                            <tr>
+                                                <% for (var column in tableItem.data[0]) {%>
+                                                <th
+                                                    <% if(tableItem.columns && tableItem.columns.customWidth && tableItem.columns.customWidth[column]) { %>
+                                                        width="<%= tableItem.columns.customWidth[column] %>"
+                                                    <% } %>
+                                                    <% if(tableItem.columns && tableItem.columns.customAlignment && tableItem.columns.customAlignment[column]) { %>
+                                                        style="text-align:<%= tableItem.columns.customAlignment[column] %>"
+                                                    <% } %>
+                                                >
+                                                    <p><%- column.charAt(0).toUpperCase() + column.slice(1) %></p>
+                                                </th>
+                                                <% } %>
+                                            </tr>
+                                            <% for (var i in tableItem.data) {%>
+                                            <tr>
+                                                <% for (var column in tableItem.data[i]) {%>
+                                                <td
+                                                    <% if(tableItem.columns && tableItem.columns.customAlignment && tableItem.columns.customAlignment[column]) { %>
+                                                        style="text-align:<%= tableItem.columns.customAlignment[column] %>"
+                                                    <% } %>
+                                                >
+                                                    <%- tableItem.data[i][column] %>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <% } %>
+                                        </table>
+                                        <% }) %>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- ONE COLUMN SECTION -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td bgcolor="#ffffff" align="center" style="padding: 15px 15px 40px 15px;" class="section-padding">
+            <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <!-- Action -->
+                            <% if (locals.action.length !== 0) { %>
+                            <% action.forEach(function (actionItem) { -%>
+                                    <tr>
+                                        <td>
+                                            <!-- COPY -->
+                                            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td align="center" style="padding: 25px 0 0 0; font-size: 16px; line-height: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                                                        <p><%- actionItem.instructions %></p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <!-- BULLETPROOF BUTTON -->
+                                            <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
+                                                <tr>
+                                                    <td align="center" style="padding: 25px 0 0 0;" class="padding-copy">
+                                                        <table border="0" cellspacing="0" cellpadding="0" class="responsive-table" style="border-spacing: 10px;">
+                                                            <tr>
+                                                                <% actionItem.button.forEach(function (actionButton) { -%>
+                                                                    <td align="center"><a href="<%- actionButton.link %>" target="_blank" style="font-size: 16px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: <%- actionButton.color %>; border-top: 15px solid <%- actionButton.color %>; border-bottom: 15px solid <%- actionButton.color %>; border-left: 25px solid <%- actionButton.color %>; border-right: 25px solid <%- actionButton.color %>; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button"><%- actionButton.text %> &rarr;</a></td>
+                                                                <% }) -%>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                <% }) -%>
+                            <% } %>
+                            <!-- Outro -->
+                            <% if (locals.outro) { %>
+                              <tr>
+                                  <td>
+                                      <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                          <tr>
+                                              <td align="center" style="padding: 25px 30px 0; font-size: 16px; line-height: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                                                  <% outro.forEach(function (outroItem) { -%>
+                                                    <p><%- outroItem %></p>
+                                                  <% }) -%>
+                                              </td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                            <% } %>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <% if (locals.action.length !== 0 && locals.action[0].button[0].fallback) { %>
+      <tr>
+        <td bgcolor="#ffffff" align="center" style="padding: 0 15px 40px 15px;" class="section-padding">
+            <hr />
+          <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+            <tr>
+                <td align="center" style="padding: 0 0 0 0; font-size: 16px; line-height: 25px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">
+                <% action.forEach(function (actionItem) { -%>
+                  <% actionItem.button.forEach(function (actionButton) { -%>
+                    <% if (actionButton.fallback != null) { %>
+                      <p style="font-size: 0.80em; text-align: left;">
+                        <%- actionButton.fallback.text %> <br />
+                        <a href="<%- actionButton.link %>"><%- actionButton.link %></a>
+                      </p>
+                    <% } %>
+                  <% }) -%>
+                <% }) -%>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    <% } %>
+
+    <tr>
+        <td bgcolor="#f8f8f8" align="center">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td style="padding: 20px 0px 20px 0px;">
+                        <!-- UNSUBSCRIBE COPY -->
+                        <table width="500" border="0" cellspacing="0" cellpadding="0" align="center" class="responsive-table">
+                            <tr>
+                                <td align="center" valign="middle" style="font-size: 12px; line-height: 18px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color:#666666;">
+                                    <span class="appleFooter" style="color:#666666;">
+                                        <%- product.copyright %>
+                                    </span>
+                                    <br>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<!-- Support for Gmail Go-To Actions -->
+<% if (locals.goToAction) { %>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "EmailMessage",
+        "potentialAction": {
+            "@type": "ViewAction",
+            "url": "<%- goToAction.link %>",
+            "target": "<%- goToAction.link %>",
+            "name": "<%- goToAction.text %>"
+        },
+        "description": "<%- goToAction.description %>"
+    }
+    </script>
+<% } %>
+
+</body>
+</html>
