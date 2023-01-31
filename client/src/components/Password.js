@@ -78,3 +78,12 @@ export default function Password() {
     </div>
   )
 }
+
+/*
+CODE EXPLANATION:
+This is a React component that displays a password input form. The form uses Formik and custom validation function passwordValidate to 
+handle form submissions and password validation. The component also uses a custom hook useFetch to fetch the user's profile data from the 
+server. The username from the user's profile data is used to make the API call. On a successful form submission, a login promise is created 
+using verifyPassword and the result is displayed as a toast message. The token from the response is stored in local storage and the user is 
+redirected to the profile page.
+*/
