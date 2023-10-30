@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import ENV from '../config.js'
 import otpGenerator from 'otp-generator';
+import  '../pdfDetails.js';
 
 /** middleware for verify user */
 export async function verifyUser(req, res, next){
@@ -167,6 +168,57 @@ export async function getUser(req,res){
 
 }
 
+export async function getUsersByRole(req, res) {
+    try {
+        const { role } = req.params;
+    
+        if (!role) return res.status(400).json({ error: 'Invalid Role' });
+
+        
+    UserModel.find({ role }, '-password', (err, users) => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+  
+        if (users.length === 0) {
+          return res.status(404).json({ error: 'No users with this role found' });
+        }
+  
+        // Exclude the password field from each user
+        const usersData = users.map(user => {
+          const { password, ...userData } = user.toObject();
+          return userData;
+        });
+
+        return res.status(200).json(usersData);
+      });
+    }    
+    catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+
+// Create a new route for fetching teacher-specific PDFs
+export async function getTeacherPDFs(req, res) {
+  const { username } = req.params; // Assuming you're using the teacher's username
+
+  try {
+    const teacher = await UserModel.findOne({ username }); // Find the teacher by username
+    if (!teacher) {
+      return res.status(404).json({ error: "Teacher not found" });
+    }
+
+    const teacherId = teacher._id; // Get the teacher's ID
+    // Find PDFs associated with the teacher's ID
+    const pdfs = await pdfDetails.find({ teacher: teacherId });
+
+    res.status(200).json(pdfs);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 
 /** PUT: http://localhost:8080/api/updateuser 
  * @param: {
@@ -275,3 +327,17 @@ export async function resetPassword(req,res){
 }
 
 
+export const home = (req, res) => {
+    // You can send a response or render a view for the home page here
+    res.send('Welcome to the home page!');
+};
+
+export const teacher_home = (req, res) => {
+    // You can send a response or render a view for the home page here
+    res.send('Welcome to the home page!');
+};
+
+export const staff_home = (req, res) => {
+    // You can send a response or render a view for the home page here
+    res.send('Welcome to the home page!');
+};

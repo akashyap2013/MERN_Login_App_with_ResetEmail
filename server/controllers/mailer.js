@@ -6,12 +6,10 @@ import ENV from '../config.js';
 
 // https://ethereal.email/create
 let nodeConfig = {
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    service : 'gmail',
     auth: {
-        user: ENV.EMAIL, // generated ethereal user
-        pass: ENV.PASSWORD, // generated ethereal password
+        user: ENV.EMAIL, 
+        pass: ENV.PASSWORD,
     }
 }
 

@@ -25,14 +25,16 @@ export async function authenticate(username){
 }
 
 /** get User details */
-export async function getUser({ username }){
+export async function getUser({ username }) {
     try {
         const { data } = await axios.get(`/api/user/${username}`);
-        return { data };
+        return { success: true, data }; // Return success and user data
     } catch (error) {
-        return { error : "Password doesn't Match...!"}
+        console.error(error); // Log the error for debugging
+        return { success: false, message: "Password doesn't Match...!" }; // Return error information
     }
 }
+
 
 /** register user function */
 export async function registerUser(credentials){
@@ -65,14 +67,18 @@ export async function verifyPassword({ username, password }){
 }
 
 /** update user profile function */
-export async function updateUser(response){
+export async function updateUser(response, navigate, setUpdateSuccess){
     try {
         
         const token = await localStorage.getItem('token');
         const data = await axios.put('/api/updateuser', response, { headers : { "Authorization" : `Bearer ${token}`}});
 
+        // Set updateSuccess to true
+        setUpdateSuccess(true);
+
         return Promise.resolve({ data })
     } catch (error) {
+        console.log(error)
         return Promise.reject({ error : "Couldn't Update Profile...!"})
     }
 }
