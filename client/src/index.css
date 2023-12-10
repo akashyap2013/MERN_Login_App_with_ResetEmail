@@ -55,25 +55,150 @@ code {
     display: flex;
       flex-direction: column;
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   .pdf-div{
     padding: 50px;
+    padding-left: 20px;
+    padding-top: 10px;
     background-color: #dedede;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-right: 500px;
+    font-family: 'Arial', sans-serif;
   }
   canvas.react-pdf__Page__canvas {
     margin-bottom: 50px;
   }
+  .dropdown{
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 25px;
+    margin-left: 10px;
+  }
+  
+.smallInput {
+  width: 10px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+  font-size: 14px; /* Adjust the font size as needed */
+  /* Add any other styles as needed */
+}
+.btn1{
+  border: 2px solid #4F46E5; /* Assuming the color corresponds to bg-indigo-500 */
+  background-color: #4F46E5; /* bg-indigo-500 */
+  width: 75%; /* w-3/4 */
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem; /* py-4 */
+  border-radius: 1rem; /* rounded-lg */
+  font-size: 1.25rem; /* text-xl */
+  color: #FFFFFF; /* text-gray-50 */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25); 
+  text-align: center; 
+}
+
+.spaced-table {
+  border-collapse: separate;
+  border-spacing: 8px; /* Adjust the spacing as needed */
+  background-color: #f0f0f0;
+
+}
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-left: 2%; /* Adjust the padding as needed */
+  position: fixed;
+  top: 100px; /* Adjust the top position as needed */
+  right: 30px;
+  background-color: lightgray;
+}
+
+
+.table-container {
+  overflow-y: auto;
+  margin-left: auto; /* Adjust margins as needed */
+  margin-right: 30px;
+}
+
+table td {
+  padding: 2px !important; /* Add padding to each cell */
+}
+
+/* Add this CSS to your stylesheet or component styles */
+.send-marks-btn {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding for the button */
+  margin-left: 85%;
+  text-align: center; /* Center text */
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 5px; /* Rounded corners */
+  position: fixed;
+  top: 80%;
+}
+
+.send-marks-btn:hover {
+  background-color: #45a049; /* Darker green color on hover */
+}
+
+.grade-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.grade-table {
+  border-collapse: collapse;
+  width: 80%;
+  margin-top: 0px;
+}
+
+.grade-table th, .grade-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+.grade-table th {
+  background-color: #f2f2f2;
+}
+
+.finalTotalLabelStyle {
+  position: fixed;
+  top: 66%;
+  left: 73%;
+  margin-top: 100px; 
+}
+
+.finalTotalValueStyle {
+  text-align: center;
+  background-color: lightgray;
+  width: 50px;
+  position: fixed;
+  top: 81%;
+  left: 80%;
+  margin-right: 10px;
+}
+
+.publish-button {
+  background-color: #4F46E5;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px; /* Adjust this margin based on your layout */
+  cursor: pointer;
+  position: relative;
+  margin-left: 260%; /* Move the button 50% to the right relative to its containing block */
+  transform: translateX(-50%); /* Center the button horizontally */
+}
+
+
+.publish-button:hover {
+  background-color: #09519e;
+}
+
+

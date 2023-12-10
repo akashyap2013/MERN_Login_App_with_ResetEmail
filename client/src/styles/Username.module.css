@@ -5,6 +5,8 @@
     backdrop-filter: blur(7.1px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     @apply border-4 border-gray-50 shrink-0 h-5/6 w-[30%] rounded-3xl py-20 px-7 min-w-max;
+    height: auto;
+    width: auto;
 }
 
 .profile_img{
@@ -19,6 +21,10 @@
 
 .btn{
     @apply border bg-indigo-500 w-3/4 py-4 rounded-lg text-gray-50 text-xl shadow-sm text-center;
+}
+
+.btn1{
+    @apply border bg-indigo-500 w-3/4 py-2 rounded-lg text-gray-50 text-sm shadow-sm text-center;
 }
 
 .btn:hover{

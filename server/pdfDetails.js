@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-const PdfDetailsSchema = new mongoose.Schema(
+export const PdfDetailsSchema = new mongoose.Schema(
   {
     pdf: String,
     title: String,
+    CourseCode: String,
     teacherId: {
       type: mongoose.Schema.Types.ObjectId,
     },
@@ -11,4 +12,4 @@ const PdfDetailsSchema = new mongoose.Schema(
   { collection: "PdfDetails" }
 );
 
-mongoose.model("PdfDetails", PdfDetailsSchema);
+export default mongoose.model("PdfDetails", PdfDetailsSchema);

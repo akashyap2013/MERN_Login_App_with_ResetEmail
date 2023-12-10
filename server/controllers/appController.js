@@ -37,7 +37,7 @@ export async function verifyUser(req, res, next){
 export async function register(req,res){
 
     try {
-        const { username, password, profile, email } = req.body;        
+        const { username, password, profile, email, courses, semesters, role, courseCodes } = req.body;        
 
         // check the existing user
         const existUsername = new Promise((resolve, reject) => {
@@ -70,7 +70,12 @@ export async function register(req,res){
                                 username,
                                 password: hashedPassword,
                                 profile: profile || '',
-                                email
+                                email,
+                                courses,
+                                semesters,
+                                role,
+                                courseCodes
+                                
                             });
 
                             // return save result as a response
@@ -258,7 +263,7 @@ export async function updateUser(req,res){
 
 /** GET: http://localhost:8080/api/generateOTP */
 export async function generateOTP(req,res){
-    req.app.locals.OTP = await otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false})
+    req.app.locals.OTP = otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false })
     res.status(201).send({ code: req.app.locals.OTP })
 }
 
@@ -325,19 +330,3 @@ export async function resetPassword(req,res){
         return res.status(401).send({ error })
     }
 }
-
-
-export const home = (req, res) => {
-    // You can send a response or render a view for the home page here
-    res.send('Welcome to the home page!');
-};
-
-export const teacher_home = (req, res) => {
-    // You can send a response or render a view for the home page here
-    res.send('Welcome to the home page!');
-};
-
-export const staff_home = (req, res) => {
-    // You can send a response or render a view for the home page here
-    res.send('Welcome to the home page!');
-};

@@ -3,6 +3,7 @@ import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "../PdfComp";
 
+
 const serverDomain = process.env.REACT_APP_SERVER_DOMAIN;
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -16,6 +17,7 @@ function ImageUpload() {
   const [allImage, setAllImage] = useState(null);
   const [pdfFile, setPdfFile] = useState(null);
   const [teachers, setTeachers] = useState([]);
+  const [CourseCode, setCourse] = useState(""); 
   const [selectedTeacher, setSelectedTeacher] = useState("");
 
   useEffect(() => {
@@ -57,14 +59,14 @@ function ImageUpload() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("file", file);
+    formData.append("CourseCode", CourseCode)
     formData.append("teacherId", teacherId);
-    console.log(title, file, teacherId);
+    console.log(title, file, CourseCode, teacherId);
 
     const result = await axios.post(`${serverDomain}/upload-files`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       }
     );
-    console.log(result);
     if (result.data.status === "ok") {
       alert("Uploaded Successfully!!!");
       getPdf();
@@ -99,6 +101,14 @@ function ImageUpload() {
           onChange={(e) => setFile(e.target.files[0])}
         />
         <br />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="CourseCode"
+          required
+          onChange={(e) => setCourse(e.target.value)}
+        />
+        <br/>
         <select
           value={selectedTeacher}
           onChange={(e) => setSelectedTeacher(e.target.value)}

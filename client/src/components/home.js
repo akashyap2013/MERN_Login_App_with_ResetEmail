@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <>
-      <div>
+      <div className="home-container">
         <header>
           <div className="header-left">
             <div className="logo">
@@ -27,24 +27,33 @@ export default function Home() {
               <ul>
                 <li>
                   <a href="/home" className="active">
-                   <i className="fa fa-home  fa-lg"></i> 
+                   <i className="fa fa-home  fa-lg"></i> Home
                   </a>
                 </li>
                 <li>
                   <div className="alert-container">
                     <a href="/alert" onClick={handleAlertClick}>
-                      <i className="fa fa-bell  fa-lg"></i> 
+                      <i className="fa fa-bell  fa-lg"></i> Alerts
                     </a>
                   </div>
                 </li>
                 <li>
-                  <a href="/about">
-                    <i className="fa fa-info-circle  fa-lg"></i> 
-                  </a>
+                <div className="dropdown"  style={{color:'white', textDecoration: 'underline', paddingLeft: '20px', fontWeight: 'bold', marginTop: '10px'}}>
+                    <i className="fa fa-info-circle  fa-lg" style={{color:'white'}}></i> Exam Score
+                  <div className="dropdown-content">
+                    <a href="/viewMarks">View Marks</a>
+                    <a href="/view_grade">View Grade</a>
+                  </div>
+                </div>
                 </li>
                 <li>
                   <a href="/profile">
-                    <i className="fa fa-user  fa-lg"></i> 
+                    <i className="fa fa-user  fa-lg"></i> Profile
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <i className="fa fa-sign-out fa-lg"></i> Logout
                   </a>
                 </li>
               </ul>

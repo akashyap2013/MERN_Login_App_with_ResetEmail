@@ -63,10 +63,6 @@ export default function StaffHome() {
           </div>
         </div>
       </header>
-      <div>
-        <h1>Welcome, Staffs!</h1>
-      </div>
-      
       {/* Notification bar */}
       {showNoAlerts && (
         <div className="notification-bar">

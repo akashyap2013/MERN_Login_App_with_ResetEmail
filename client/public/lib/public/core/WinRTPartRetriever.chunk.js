@@ -1,0 +1,6 @@
+/** Notice * This file contains works from many authors under various (but compatible) licenses. Please see core.txt for more information. **/
+(function(){(window.wpCoreControlsBundle=window.wpCoreControlsBundle||[]).push([[14],{528:function(wa,ta,n){n.r(ta);var pa=n(0),na=n(293);wa=n(518);var oa=n(113);n=n(439);var ia={},ka=function(ea){function z(x,f){var e=ea.call(this,x,f)||this;e.url=x;e.range=f;e.status=na.a.NOT_STARTED;return e}Object(pa.c)(z,ea);z.prototype.start=function(x){var f=this;"undefined"===typeof ia[this.range.start]&&(ia[this.range.start]={yT:function(e){var a=atob(e),b,h=a.length;e=new Uint8Array(h);for(b=0;b<h;++b)e[b]=a.charCodeAt(b);
+a=e.length;b="";for(var r=0;r<a;)h=e.subarray(r,r+1024),r+=1024,b+=String.fromCharCode.apply(null,h);f.yT(b,x)},EEa:function(){f.status=na.a.ERROR;x({code:f.status})}},window.external.notify(this.url),this.status=na.a.STARTED);f.OG()};return z}(wa.ByteRangeRequest);wa=function(ea){function z(x,f,e,a){x=ea.call(this,x,e,a)||this;x.KB=ka;return x}Object(pa.c)(z,ea);z.prototype.fz=function(x,f){return x+"?"+f.start+"&"+(f.stop?f.stop:"")};return z}(oa.a);Object(n.a)(wa);Object(n.b)(wa);ta["default"]=
+wa}}]);}).call(this || window)
+
+//# sourceMappingURL=WinRTPartRetriever.chunk.js.map

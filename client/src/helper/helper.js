@@ -6,7 +6,6 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 /** Make API Requests */
 
-
 /** To get username from Token */
 export async function getUsername(){
     const token = localStorage.getItem('token')
@@ -39,8 +38,9 @@ export async function getUser({ username }) {
 /** register user function */
 export async function registerUser(credentials){
     try {
+        console.log("data", credentials)
         const { data : { msg }, status } = await axios.post(`/api/register`, credentials);
-
+        
         let { username, email } = credentials;
 
         /** send email */
@@ -86,8 +86,9 @@ export async function updateUser(response, navigate, setUpdateSuccess){
 /** generate OTP */
 export async function generateOTP(username){
     try {
+        
         const {data : { code }, status } = await axios.get('/api/generateOTP', { params : { username }});
-
+    
         // send mail with the OTP
         if(status === 201){
             let { data : { email }} = await getUser({ username });

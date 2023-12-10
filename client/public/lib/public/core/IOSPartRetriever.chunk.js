@@ -1,0 +1,5 @@
+/** Notice * This file contains works from many authors under various (but compatible) licenses. Please see core.txt for more information. **/
+(function(){(window.wpCoreControlsBundle=window.wpCoreControlsBundle||[]).push([[6],{526:function(wa,ta,n){n.r(ta);var pa=n(0),na=n(293);wa=n(518);n(29);n=n(439);var oa=function(ia){function ka(ea,z){var x=ia.call(this,ea,z)||this;x.url=ea;x.range=z;x.status=na.a.NOT_STARTED;return x}Object(pa.c)(ka,ia);ka.prototype.start=function(){var ea=document.createElement("IFRAME");ea.setAttribute("src",this.url);document.documentElement.appendChild(ea);ea.parentNode.removeChild(ea);this.status=na.a.STARTED;this.OG()};
+return ka}(wa.ByteRangeRequest);wa=function(ia){function ka(ea,z,x,f){ea=ia.call(this,ea,z,x,f)||this;ea.KB=oa;return ea}Object(pa.c)(ka,ia);ka.prototype.fz=function(ea,z){return ea+"#"+z.start+"&"+(z.stop?z.stop:"")};return ka}(wa["default"]);Object(n.a)(wa);Object(n.b)(wa);ta["default"]=wa}}]);}).call(this || window)
+
+//# sourceMappingURL=IOSPartRetriever.chunk.js.map

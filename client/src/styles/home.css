@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    margin-top: 4px;
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
@@ -71,7 +72,39 @@ header .header-right .hamburger div {
     border: 1px solid #ccc; /* Border for styling */
     z-index: 9999;        /* Ensure it's above other content */
   }
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    color:'white';
+    text-decoration: 'underline';
+    padding-left: '20px';
+    font-Weight: 'bold';
+  }
   
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
   
 @media only screen and (max-width: 1000px) {
     header {

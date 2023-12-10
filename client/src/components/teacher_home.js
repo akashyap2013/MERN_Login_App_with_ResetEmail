@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../assets/logo 2-modified.png';
-import PdfComp from '../PdfComp';
+import PdfComp1 from '../PdfComp1';
+import jwt_decode from 'jwt-decode';
 
 const serverDomain = process.env.REACT_APP_SERVER_DOMAIN;
 
 export default function TeacherHome() {
   const [showNoAlerts, setShowNoAlerts] = useState(false);
-  const [pdfFile, setPdfFile] = useState(null);
   const [pdfs, setPdfs] = useState([]);
+  const [uniqueTitles, setUniqueTitles] = useState([]);
+  const [selectedTitle, setSelectedTitle] = useState(null);
 
   const handleAlertClick = (event) => {
     event.preventDefault();
@@ -16,24 +18,89 @@ export default function TeacherHome() {
     setTimeout(() => setShowNoAlerts(false), 2000);
   };
 
-  useEffect(() => {
-    const apiUrl = '/api/pdfs'; // Update with your API URL
+  // Function to get the current user's username from JWT
+function getUsername() {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return Promise.reject("Cannot find Token");
+  }
+  const decode = jwt_decode(token);
+  return decode.username; 
+}
 
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        console.log('API Response:', response.data);
-        setPdfs(response.data.pdfs || []); // Make sure 'pdfs' is an array
-      })
-      .catch((error) => {
-        console.error('Error fetching PDFs:', error);
-      });
-  }, []);
+async function getTeacherId() {
+  try {
+    const username = await getUsername();
+    const response = await axios.get(`/api/user/${username}`);
+    const userData = response.data;
+    
+    const teacherId = userData._id;
 
-  const showPdf = (pdf) => {
-    setPdfFile(`${serverDomain}/files/${pdf}`);
+    return teacherId;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return null; // Handle the error appropriately
+  }
+}
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const teacherId = await getTeacherId();
+      const apiUrl = `/api/pdfs?teacherId=${teacherId}`;
+      const response = await axios.get(apiUrl);
+
+      const pdfData = response.data.data || [];
+      setPdfs(pdfData);
+
+      const uniqueTitles = [...new Set(pdfData.map((pdf) => pdf.title.toLowerCase()))];
+      setUniqueTitles(uniqueTitles);
+    } catch (error) {
+      console.error('Error fetching PDFs:', error);
+    }
   };
 
+  fetchData();
+},[]);
+
+const handleShowPdf = async (title) => {
+  try {
+    // Get the teacherId dynamically
+    const teacherId = await getTeacherId();
+
+    // Fetch PDFs from the server based on the title and teacherId
+    const response = await fetch(`${serverDomain}/api/title?teacherId=${encodeURIComponent(teacherId)}&title=${encodeURIComponent(title)}`);
+    const data = await response.json();
+    console.log("data :", data);
+
+    // Optionally, you can set the selected title if needed
+    setSelectedTitle(title);
+
+    // Check if the 'data' property exists in the response
+    if (data.data.length > 0) {
+      // Save the PDF data to localStorage
+      localStorage.setItem('pdfData', JSON.stringify(data.data));
+
+      // Open a new tab and display file names with "View PDF" buttons
+      const newTab = window.open();
+      console.log("new tab : ", newTab);
+      if (newTab) {
+        newTab.location.href = '/pdflist'; // Navigate to the /pdflist route
+      }
+    } else {
+      console.error('No PDF data found in the response');
+    }
+  } catch (error) {
+    console.error('Error fetching PDFs:', error);
+  }
+};
+
+const deletePdf = (title) => {
+  // Find the PDFs with the selected title and remove them from the list
+  setPdfs((prevPdfs) => prevPdfs.filter((pdf) => pdf.title.toLowerCase() !== title.toLowerCase()));
+  // Reset the selected title to null
+  setSelectedTitle(null);
+};
   return (
     <>
       <div>
@@ -57,13 +124,18 @@ export default function TeacherHome() {
                   </div>
                 </li>
                 <li>
-                  <a href="/about">
-                    <i className="fa fa-info-circle fa-lg"></i> About
+                  <a href="/profile">
+                    <i className="fa fa-user fa-lg"></i> Profile
                   </a>
                 </li>
                 <li>
-                  <a href="/profile">
-                    <i className="fa fa-user fa-lg"></i> Profile
+                  <a href="/grade"> {/* Add the "Grade" link */}
+                    <i className="fa fa-book fa-lg"></i> Grade
+                  </a>
+                </li>
+                <li>
+                  <a href="/">
+                    <i className="fa fa-sign-out fa-lg"></i> Logout
                   </a>
                 </li>
               </ul>
@@ -79,20 +151,28 @@ export default function TeacherHome() {
         </header>
       </div>
       <div>
-        <h1>Teacher page</h1>
         <div className="uploaded">
           <h4>PDF's:</h4>
           <div className="output-div">
-            {pdfs.length > 0 ? (
-              pdfs.map((data, index) => (
+            {uniqueTitles.length > 0 ? (
+              uniqueTitles.map((title, index) => (
                 <div className="inner-div" key={index}>
-                  <h6>Title: {data.title}</h6>
+                  <h6>Title: {title}</h6>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleShowPdf(title)}
+                    >
+                      Show Pdfs
+                    </button>
+                    &nbsp;
                   <button
-                    className="btn btn-primary"
-                    onClick={() => showPdf(data.pdf)}
+                    className="btn btn-danger"
+                    onClick={() => deletePdf(title)}
                   >
-                    Show Pdf
+                    Delete
                   </button>
+                  </div>
                 </div>
               ))
             ) : (
@@ -100,7 +180,7 @@ export default function TeacherHome() {
             )}
           </div>
         </div>
-        <PdfComp pdfFile={pdfFile} />
+        <PdfComp1 pdfs={pdfs.filter((pdf) => pdf.title.toLowerCase() === selectedTitle?.toLowerCase())}/>
       </div>
       {showNoAlerts && (
         <div className="notification-bar">
@@ -109,4 +189,4 @@ export default function TeacherHome() {
       )}
     </>
   );
-}
+} 

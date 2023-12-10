@@ -1,5 +1,6 @@
 .glass{
     @apply h-5/6 w-5/6;
+    height: auto
 }
 
 .profile_img{

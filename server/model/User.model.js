@@ -19,10 +19,13 @@ export const UserSchema = new mongoose.Schema({
     firstName: { type: String},
     lastName: { type: String},
     mobile : { type : Number},
-    course: { type: String},
-    semester : { type: String},
+    courses: { type: String},
+    semesters : { type: String},
     profile: { type: String},
-    role : { type: String}
+    role : { type: String},
+    courseCodes : { type: Array},
+    registerNo: {type: String}
+    
 });
 
 export default mongoose.model.Users || mongoose.model('User', UserSchema);

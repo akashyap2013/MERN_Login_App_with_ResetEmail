@@ -1,0 +1,5 @@
+/** Notice * This file contains works from many authors under various (but compatible) licenses. Please see core.txt for more information. **/
+(function(){(window.wpCoreControlsBundle=window.wpCoreControlsBundle||[]).push([[1],{522:function(wa,ta,n){n.r(ta);var pa=n(0),na=n(293);wa=n(518);n=n(439);var oa=window,ia=function(ka){function ea(z,x){var f=ka.call(this,z,x)||this;f.url=z;f.range=x;f.request=new XMLHttpRequest;f.request.open("GET",f.url,!0);oa.Uint8Array&&(f.request.responseType="arraybuffer");f.request.setRequestHeader("X-Requested-With","XMLHttpRequest");f.status=na.a.NOT_STARTED;return f}Object(pa.c)(ea,ka);return ea}(wa.ByteRangeRequest);
+wa=function(ka){function ea(z,x,f,e){z=ka.call(this,z,x,f,e)||this;z.KB=ia;return z}Object(pa.c)(ea,ka);ea.prototype.fz=function(z,x){return z+"/bytes="+x.start+","+(x.stop?x.stop:"")};return ea}(wa["default"]);Object(n.a)(wa);Object(n.b)(wa);ta["default"]=wa}}]);}).call(this || window)
+
+//# sourceMappingURL=AndroidContentPartRetriever.chunk.js.map

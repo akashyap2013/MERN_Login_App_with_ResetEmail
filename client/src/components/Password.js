@@ -31,6 +31,7 @@ export default function Password() {
       student: '/home',
       teacher: '/teacher_home',
       staff: '/staff_home',
+      admin: '/register'
     }[role]
 
 
@@ -156,7 +157,7 @@ export default function Password() {
     
                   <div className="text-center py-3">    
                         <span className='text-gray-500'>Forgot Password? <Link className='text-red-500' to="/recovery">Recover Now </Link></span>
-                        <span className='text-gray-500'>Can't get OTP? <button onClick={resendOTP} className='text-red-500'>Resend</button></span>
+                        <span className='text-gray-500'>Can't get OTP? <button onClick={resendOTP} className='text-red-500' type='submit'>Resend</button></span>
                   </div>
                 </form>
     
